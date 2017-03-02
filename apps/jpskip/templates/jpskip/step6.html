@@ -6,6 +6,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         {% load staticfiles %}
         <!-- <link rel="stylesheet" type="text/css" href="{% static 'jpskip/stylesheets/style.css' %}"> -->
+        <style> .hit{ display:none;}</style>
         <script type="text/javascript" src="{% static 'jpskip/scripts/script.js' %}" defer></script>
     </head>
     <body>
@@ -20,17 +21,28 @@
                 <li><a href="/step6">step6</a></li>
             </ul>
         </div>
-        <div class="character"><h1>{{random.kanji}} {{random.p1}}</h1></div>
+        <div class="character" value="{{random.kanji}}" id="randomKanji">
+            <h1>{{random.kanji}} {{random.p1}} {{random.p2}} {{random.p3}}</h1>
+        </div>
         <div class="main">
-            <form action="/process" method="post" id="step1">
+            <form action="/process" method="post" id="step6">
                 {% csrf_token %}
                 <input type="hidden" id="p1" value="{{random.p1}}" >
-                <input type="hidden" name="step" value="1" >
-                <input type="text" id="userp1" style="width: 15px">
-                <span>-{{random.p2}}-{{random.p3}}</span>
-                <input type="submit" value="Submit">
+                <input type="hidden" id="p2" value="{{random.p2}}" >
+                <input type="hidden" id="p3" value="{{random.p3}}" >
+                <input type="hidden" name="step" value="6" >
+                <span>
+                    <input type="text" id="userp1" style="width: 15px">
+                    -<input type="text" id="userp2" style="width: 15px">
+                    -<input type="text" id="userp3" style="width: 15px">
+                </span>
+                <button type="button" id="SKIPcheck">Submit</button>
+                <button type="button" id="test">test</button>
             </form>
             <span id="msg"></span>
+                {%for char in skipHits%}
+                    <span class="hit" {%if char.kanji == random.kanji %}id="hit"{%endif%}>{{char.kanji}}</span>
+                {%endfor%}
         </div>
     </body>
 </html>

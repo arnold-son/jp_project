@@ -18,15 +18,16 @@
                     <li><a href="/step3">step3</a></li>
                     <li><a href="/step4">step4</a></li>
                     <li><a href="/step5">step5</a></li>
+                    <li><a href="/step6">step6</a></li>
                 </ul>
             </div>
         <div class="character">
             <h1>{{randomCat4.kanji}} {{randomCat4.p3}}</h1>
           </div>
         <div class="main">
-            <form action="/process" method="post" id="test">
+            <form action="/process" method="post" id="step4">
                 {% csrf_token %}
-                <input type="hidden" id="answer" value="{{randomCat4.p3}}" >
+                <input type="hidden" id="userp3" value="{{randomCat4.p3}}" >
                 <input type="hidden" name="step" value="4">
                 <span>{{randomCat4.p1}}-{{randomCat4.p2}}-<input type="text" name="guess" id="guess" style="width: 15px"></span>
                 <input type="submit" value="Submit">

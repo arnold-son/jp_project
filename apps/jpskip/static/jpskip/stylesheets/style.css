@@ -80,3 +80,6 @@ form {
 p {
   padding: 5px;
 }
+.hit {
+    display: none;
+}

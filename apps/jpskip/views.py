@@ -22,6 +22,9 @@ def process(request):
         return redirect('/step4')
     if request.POST['step'] == "5":
         return redirect('/step5')
+    if request.POST['step'] == "6":
+        return redirect('/step6')
+
     return redirect('/')
 
 def step1(request):
@@ -34,3 +37,10 @@ def step4(request):
     return render(request, 'jpskip/step4.html', {'randomCat4': Character.objects.randomizer(4)})
 def step5(request):
     return render(request, 'jpskip/step5.html', {'random': Character.objects.randomizer()})
+def step6(request):
+    random = Character.objects.randomizer()
+    context = {
+        'random': random,
+        'skipHits': Character.objects.filter(skipcode=random.skipcode)
+    }
+    return render(request, 'jpskip/step6.html', context)
